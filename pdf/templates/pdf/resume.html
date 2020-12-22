@@ -3,24 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume</title>
+    <title>Document</title>
 </head>
 <body>
-    <h2>{{user_profile.name}}</h2>
+    <div style="color: red;">
+        <h2>{{user_profile.name}}</h2>
+    </div>
     <h3>{{user_profile.email}}</h3>
     <h3>{{user_profile.phone}}</h3>
     <hr>
+    <br>
     <h2>Summary</h2>
     <p>{{user_profile.summary}}</p>
-
+    <hr>
     <h2>Skills</h2>
     <p>{{user_profile.skills}}</p>
     <hr>
     <h2>Education</h2>
     <ul>
-        <li>{{user_profile.school}}</li>
-        <li>{{user_profile.university}}</li>
+        <li>School: {{user_profile.school}}</li>
+        <li>{{user_profile.degree}} from {{user_profile.university}}</li>
     </ul>
-    <p>{{user_profile.school}}</p>
+    <hr>
+    <h2>Previous Work</h2>
+    <p>{{user_profile.previous_work}}</p>
 </body>
 </html>
