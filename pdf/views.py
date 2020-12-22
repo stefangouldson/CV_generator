@@ -3,6 +3,7 @@ from .models import Profile
 from django.http import HttpResponse
 from django.template import loader
 import pdfkit
+# config = pdfkit.configuration(wkhtmltopdf=r"C:\Users\sgouldson.CASPIAN71\Documents\coding\udemy\django_course\CV_generator\wkhtmltopdf\bin")
 import io
 import os
 
@@ -25,20 +26,19 @@ def accept(request):
 
     return render(request, 'pdf/accept.html')
 
-def resume(request, id):
+def resume(request,id):
     user_profile = Profile.objects.get(pk=id)
     template = loader.get_template('pdf/resume.html')
-    html = template.render({'user_profile': user_profile})
+    html = template.render({'user_profile':user_profile})
     options ={
         'page-size':'Letter',
-        'encoding':"UTF-8"
+        'encoding':"UTF-8",
     }
 
-    config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
-    
-    pdf = pdfkit.from_string(html, False, options)
-    response = HttpResponse(pdf, content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment'
-    filename = "resume.pdf"
+    config = pdfkit.configuration(wkhtmltopdf=r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
+
+    pdf = pdfkit.from_string(html,False,options=options,configuration=config)
+    response = HttpResponse(pdf,content_type='application/pdf')
+    response['Content-Disposition'] ='attachment;filename=resume.pdf'
 
     return response
